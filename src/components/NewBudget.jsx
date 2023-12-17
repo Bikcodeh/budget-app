@@ -9,20 +9,19 @@ export const NewBudget = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (currentValue < 0 || !Number(currentValue))  {
-      console.log('error')
+    if (!Number(currentValue) || currentValue < 0)  {
       setMessage('Value is invalid')
+      return
     } else {
-      console.log('bien');
       setMessage('')
     }
   }
 
   return (
-    <div className='contenedor-presupuesto contenedor sombra'>
+    <div className='contenedor-presupuesto contenedor sombra animate__animated animate__zoomIn'>
         <form onSubmit={handleSubmit} className='formulario'>
             <div className='campo'>
-                <label>Definir presupuesto</label>
+                <label>Define budget</label>
                 <input 
                     className='nuevo-presupuesto'
                     type='text'
