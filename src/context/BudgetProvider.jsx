@@ -6,13 +6,16 @@ const initialState = {
 }
 
 export const BudgetProvider = ({ children }) => {
-    const [value, setValue] = useState(0);
+    const [budgetState, setBudgetState] = useState(initialState);
 
     const updateValue = (newValue) => {
-        setValue(newValue);
+        setBudgetState(state => ({
+            ...state,
+            currentValue: newValue
+        }));
     }
     return (
-        <BudgetContext.Provider value={{value, updateValue}}>
+        <BudgetContext.Provider value={{...budgetState, updateValue}}>
             { children }
         </BudgetContext.Provider>
     )
