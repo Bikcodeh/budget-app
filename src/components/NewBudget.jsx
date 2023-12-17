@@ -1,6 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
+import { BudgetContext } from '../context/budgetContext'
 
 export const NewBudget = () => {
+
+  const {value, updateValue} = useContext(BudgetContext);
+
   return (
     <div className='contenedor-presupuesto contenedor sombra'>
         <form className='formulario'>
@@ -10,6 +14,8 @@ export const NewBudget = () => {
                     className='nuevo-presupuesto'
                     type='text'
                     placeholder='Add your budget'
+                    value={value}
+                    onChange={e => updateValue(e.target.value)}
                 />
             </div>
             <input type='submit' value='Add' />
