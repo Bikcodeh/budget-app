@@ -5,7 +5,7 @@ import { AlertMessage } from './AlertMessage';
 export const NewBudget = () => {
 
   const [message, setMessage] = useState('');
-  const {currentValue, updateValue} = useContext(BudgetContext);
+  const {currentValue, updateValue, handleSession} = useContext(BudgetContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +14,9 @@ export const NewBudget = () => {
       return
     } else {
       setMessage('')
+      localStorage.setItem('hasData', 'true');
+      handleSession(true);
+      updateValue(0);
     }
   }
 

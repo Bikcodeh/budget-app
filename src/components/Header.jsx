@@ -1,10 +1,19 @@
+import { useContext, useEffect } from "react";
 import { NewBudget } from "./NewBudget";
+import { BudgetContext } from "../context/budgetContext";
 
 export const Header = () => {
+  const { handleSession } = useContext(BudgetContext);
+  const hasData = localStorage.getItem('hasData');
+
+  const logout = () => {
+    handleSession(false);
+    localStorage.removeItem('hasData')
+  }
   return (
     <header className="header">
       <h1>Expense Planner</h1>
-      <NewBudget />
+      { hasData ? <><button onClick={() => logout()}>Logout</button></> : <NewBudget />}
     </header>
   );
 };
