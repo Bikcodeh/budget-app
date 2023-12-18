@@ -2,8 +2,9 @@ import { useState } from "react";
 import { BudgetContext } from "./budgetContext";
 
 const initialState = {
-  currentValue: localStorage.getItem('budgetMoney') ?? 0,
-  isLogged: localStorage.getItem('hasData') ?? false,
+  currentValue: localStorage.getItem("budgetMoney") ?? 0,
+  isLogged: localStorage.getItem("hasData") ?? false,
+  expenses: JSON.parse(localStorage.getItem("expenses")) ?? [],
 };
 
 export const BudgetProvider = ({ children }) => {
@@ -16,6 +17,13 @@ export const BudgetProvider = ({ children }) => {
     }));
   };
 
+  const addExpense = (expense) => {
+    setBudgetState((state) => ({
+      ...state,
+      expenses: [expense, ...state.expenses],
+    }));
+  };
+
   const handleSession = (allowAccess = false) => {
     setBudgetState((state) => ({
       ...state,
@@ -24,7 +32,7 @@ export const BudgetProvider = ({ children }) => {
   };
   return (
     <BudgetContext.Provider
-      value={{ ...budgetState, updateValue, handleSession }}
+      value={{ ...budgetState, updateValue, handleSession, addExpense }}
     >
       {children}
     </BudgetContext.Provider>

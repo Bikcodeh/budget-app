@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BudgetContext } from "../context/budgetContext";
-import { moneyFormatter } from "../helpers/moneyFormatter";
+import { moneyFormatter } from "../helpers";
 
 export const BudgetControl = () => {
 

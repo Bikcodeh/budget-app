@@ -43,6 +43,10 @@ h2 {
   border-radius: 1.2rem;
 }
 
+.error_form_validation {
+  color: orangered;
+}
+
 header {
   background-color: var(--azul);
   min-height: 300px;
@@ -59,7 +63,8 @@ header h1 {
 }
 
 .formulario {
-  width: 95%;
+  width: 90%;
+  align-self: center;
 }
 
 .formulario legend {
