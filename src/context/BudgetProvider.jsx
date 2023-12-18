@@ -3,7 +3,7 @@ import { BudgetContext } from "./budgetContext";
 
 const initialState = {
   currentValue: localStorage.getItem('budgetMoney') ?? 0,
-  isLogged: false,
+  isLogged: localStorage.getItem('hasData') ?? false,
 };
 
 export const BudgetProvider = ({ children }) => {
