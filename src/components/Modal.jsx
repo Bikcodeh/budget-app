@@ -16,7 +16,8 @@ export const Modal = ({ closeModal }) => {
   const { addExpense } = useContext(BudgetContext);
   const handleSubmit = ({description, amount, category}) => {
     const id = generateUid();
-    addExpense({description, amount, category, id});
+    const date = Date.now();
+    addExpense({description, amount, category, id, date});
     closeModal();
   };
   return (
@@ -86,9 +87,7 @@ export const Modal = ({ closeModal }) => {
                 </Field>
                 <ErrorMessage name="category" component="div" className="error_form_validation" />
               </div>
-              <button type="submit" value="Add Expense" disabled={isSubmitting}>
-                Add expense
-              </button>
+              <input type="submit" value="Add Expense" disabled={isSubmitting} />
             </Form>
           )}
         </Formik>

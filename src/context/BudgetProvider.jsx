@@ -18,10 +18,14 @@ export const BudgetProvider = ({ children }) => {
   };
 
   const addExpense = (expense) => {
-    setBudgetState((state) => ({
-      ...state,
-      expenses: [expense, ...state.expenses],
-    }));
+    setBudgetState((state) => {
+      const newSate = {
+        ...state,
+        expenses: [expense, ...state.expenses],
+      };
+      localStorage.setItem("expenses", JSON.stringify(newSate.expenses));
+      return newSate;
+    });
   };
 
   const handleSession = (allowAccess = false) => {
