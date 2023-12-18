@@ -15,8 +15,8 @@ export const NewBudget = () => {
     } else {
       setMessage('')
       localStorage.setItem('hasData', 'true');
+      localStorage.setItem('budgetMoney', currentValue);
       handleSession(true);
-      updateValue(0);
     }
   }
 

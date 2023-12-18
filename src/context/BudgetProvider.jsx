@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BudgetContext } from "./budgetContext";
 
 const initialState = {
-  currentValue: 0,
+  currentValue: localStorage.getItem('budgetMoney') ?? 0,
   isLogged: false,
 };
 
