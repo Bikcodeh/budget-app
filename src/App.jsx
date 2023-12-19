@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { BudgetContext } from "./context/budgetContext";
 import { Modal } from "./components/Modal";
 import { ExpenseList } from "./components/ExpenseList";
+import { Filters } from "./components/Filters";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,7 @@ function App() {
       {currentValue > 0 && isLogged && (
         <>
           <main>
+            <Filters />
             <ExpenseList />
           </main>
           <div className="nuevo-gasto">

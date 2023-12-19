@@ -6,6 +6,7 @@ const initialState = {
   isLogged: localStorage.getItem("hasData") ?? false,
   expenses: JSON.parse(localStorage.getItem("expenses")) ?? [],
   currentActive: null,
+  filtered: null,
 };
 
 export const BudgetProvider = ({ children }) => {
@@ -57,9 +58,24 @@ export const BudgetProvider = ({ children }) => {
   const editExpense = (expense) => {
     setBudgetState((state) => ({
       ...state,
-      expenses: state.expenses.map((item) => (item.id === expense.id ? expense : item)),
+      expenses: state.expenses.map((item) =>
+        item.id === expense.id ? expense : item
+      ),
     }));
   };
+  const filterExpenses = (category) => {
+    setBudgetState((state) => ({
+        ...state,
+        filtered: state.expenses.filter(item => item.category == category)
+    }));
+  };
+
+  const clearFiltered = () => {
+    setBudgetState(state => ({
+      ...state,
+      filtered: null
+    }))
+  }
   return (
     <BudgetContext.Provider
       value={{
@@ -70,6 +86,8 @@ export const BudgetProvider = ({ children }) => {
         editExpense,
         deleteExpense,
         setExpenseActive,
+        filterExpenses,
+        clearFiltered
       }}
     >
       {children}

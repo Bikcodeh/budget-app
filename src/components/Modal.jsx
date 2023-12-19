@@ -74,7 +74,7 @@ export const Modal = ({ closeModal }) => {
             <Form className="formulario animate__animated animate__fadeIn animate__fast">
               <legend>{ currentActive ? 'Edit' : 'New'} Expense</legend>
               <div className="campo">
-                <label for="description">Description</label>
+                <label htmlFor="description">Description</label>
                 <Field
                   name="description"
                   type="text"
@@ -87,7 +87,7 @@ export const Modal = ({ closeModal }) => {
                 />
               </div>
               <div className="campo">
-                <label for="amount">Amount</label>
+                <label htmlFor="amount">Amount</label>
                 <Field
                   id="amount"
                   name="amount"
@@ -101,7 +101,7 @@ export const Modal = ({ closeModal }) => {
                 />
               </div>
               <div className="campo">
-                <label for="category">Category</label>
+                <label htmlFor="category">Category</label>
                 <Field name="category" id="category" as="select">
                   <option value=""> -- Select --</option>
                   <option value="food">Food</option>
