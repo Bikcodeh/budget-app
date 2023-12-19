@@ -24,7 +24,7 @@ export const NewBudget = () => {
     <div className='contenedor-presupuesto contenedor sombra animate__animated animate__zoomIn'>
         <form onSubmit={handleSubmit} className='formulario'>
             <div className='campo'>
-                <label>Define budget</label>
+                <span>Define budget</span>
                 <input 
                     className='nuevo-presupuesto'
                     type='text'

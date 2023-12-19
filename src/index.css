@@ -344,6 +344,7 @@ main {
   height: 100vh;
   width: 100%;
   overflow: auto;
+  margin-bottom: 40px;
 }
 .modal .cerrar-modal {
   position: absolute;
@@ -366,9 +367,6 @@ main {
 }
 .modal label {
   color: var(--blanco);
-}
-body .modal {
-  overflow: hidden;
 }
 
 .modal .formulario.animar {

@@ -1864,6 +1864,11 @@ react-refresh@^0.14.0:
   resolved "https://npm.artifacts.furycloud.io/repository/all/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
+react-swipeable-list@^1.9.3:
+  version "1.9.3"
+  resolved "https://npm.artifacts.furycloud.io/repository/all/react-swipeable-list/-/react-swipeable-list-1.9.3.tgz#b1523e818f19deb5a20192ae17dd6c51c073a071"
+  integrity sha512-YinT0+Ww3SNJZaTVBGAN86tNL2cka5s4m8MkQfgp8kdoORuGaPoo+PemFK3kA3mb6vkSZc0IBCp6Ci3y1Er21Q==
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://npm.artifacts.furycloud.io/repository/all/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"

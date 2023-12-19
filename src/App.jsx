@@ -1,6 +1,6 @@
 import { Header } from "./components/Header";
 import IconNewExpense from "./assets/nuevo-gasto.svg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BudgetContext } from "./context/budgetContext";
 import { Modal } from "./components/Modal";
 import { ExpenseList } from "./components/ExpenseList";
@@ -10,7 +10,13 @@ function App() {
   const handleAddNewExpense = () => {
     setShowModal(true);
   };
-  const { currentValue, isLogged } = useContext(BudgetContext);
+  const { currentValue, isLogged, currentActive } = useContext(BudgetContext);
+  useEffect(() => {
+    if (!!currentActive) {
+      setShowModal(true);
+    }
+  }, [currentActive]);
+
   return (
     <div>
       <Header />

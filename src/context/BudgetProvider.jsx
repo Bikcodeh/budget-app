@@ -5,6 +5,7 @@ const initialState = {
   currentValue: localStorage.getItem("budgetMoney") ?? 0,
   isLogged: localStorage.getItem("hasData") ?? false,
   expenses: JSON.parse(localStorage.getItem("expenses")) ?? [],
+  currentActive: null,
 };
 
 export const BudgetProvider = ({ children }) => {
@@ -28,15 +29,48 @@ export const BudgetProvider = ({ children }) => {
     });
   };
 
+  const deleteExpense = (id) => {
+    setBudgetState((state) => {
+      const newState = {
+        ...state,
+        expenses: state.expenses.filter((item) => item.id !== id),
+      };
+      localStorage.setItem("expenses", JSON.stringify(newState.expenses));
+      return newState;
+    });
+  };
+
   const handleSession = (allowAccess = false) => {
     setBudgetState((state) => ({
       ...state,
       isLogged: allowAccess,
     }));
   };
+
+  const setExpenseActive = (expense) => {
+    setBudgetState((state) => ({
+      ...state,
+      currentActive: expense,
+    }));
+  };
+
+  const editExpense = (expense) => {
+    setBudgetState((state) => ({
+      ...state,
+      expenses: state.expenses.map((item) => (item.id === expense.id ? expense : item)),
+    }));
+  };
   return (
     <BudgetContext.Provider
-      value={{ ...budgetState, updateValue, handleSession, addExpense }}
+      value={{
+        ...budgetState,
+        updateValue,
+        handleSession,
+        addExpense,
+        editExpense,
+        deleteExpense,
+        setExpenseActive,
+      }}
     >
       {children}
     </BudgetContext.Provider>
