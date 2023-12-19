@@ -7,7 +7,7 @@ export const ExpenseList = () => {
 
   return (
     <div className='listado-gastos contenedor'>
-        <h2>{ expenses.length ? ' Gastos': 'Your expenses will appear here'}</h2>
+        <h2>{ expenses.length ? ' Expenses': 'Your expenses will appear here'}</h2>
         { expenses.map(expense => (<ExpenseItem {...expense} key={expense.id} />))}
     </div>
   )

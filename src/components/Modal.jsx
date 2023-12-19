@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import CloseIcon from "../assets/cerrar.svg";
 import { useForm } from "../hooks/useForm";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BudgetContext } from "../context/budgetContext";
 import { generateUid } from "../helpers";
 
@@ -12,7 +12,13 @@ const initialFormData = {
 };
 
 export const Modal = ({ closeModal }) => {
-
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+  }, [])
+  
   const { addExpense } = useContext(BudgetContext);
   const handleSubmit = ({description, amount, category}) => {
     const id = generateUid();
