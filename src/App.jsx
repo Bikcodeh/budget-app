@@ -1,5 +1,5 @@
 import { Header } from "./components/Header";
-import IconNewExpense from "./assets/nuevo-gasto.svg";
+import IconNewExpense from "/assets/nuevo-gasto.svg";
 import { useContext, useEffect, useState } from "react";
 import { BudgetContext } from "./context/budgetContext";
 import { Modal } from "./components/Modal";

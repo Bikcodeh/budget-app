@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import CloseIcon from "../assets/cerrar.svg";
+import CloseIcon from "/assets/cerrar.svg";
 import { useContext, useEffect, useMemo } from "react";
 import { BudgetContext } from "../context/budgetContext";
 import { generateUid } from "../helpers";
