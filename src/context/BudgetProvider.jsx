@@ -76,6 +76,13 @@ export const BudgetProvider = ({ children }) => {
       filtered: null
     }))
   }
+
+  const resetApp = () => {
+    localStorage.removeItem('hasData')
+    localStorage.removeItem('budgetMoney')
+    localStorage.removeItem('expenses')
+    setBudgetState(initialState)
+  }
   return (
     <BudgetContext.Provider
       value={{
@@ -87,7 +94,8 @@ export const BudgetProvider = ({ children }) => {
         deleteExpense,
         setExpenseActive,
         filterExpenses,
-        clearFiltered
+        clearFiltered,
+        resetApp
       }}
     >
       {children}
