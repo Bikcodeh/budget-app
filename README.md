@@ -2,6 +2,8 @@
 
 Application made with React to track your budget
 
+## Deployed: https://bikcodeh.github.io/budget-app/
+
 ## Features
 - Create your budget
 - Add expenses
