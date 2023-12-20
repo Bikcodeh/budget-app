@@ -1,8 +1,35 @@
-# React + Vite
+# Budget App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application made with React to track your budget
 
-Currently, two official plugins are available:
+## Deployed: https://bikcodeh.github.io/budget-app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Create your budget
+- Add expenses
+- Edite expense
+- Delete expense
+- Reset budget
+
+## Stack
+- Custom hooks
+- Communication between components
+- CSS
+- React
+- Javascript
+- Context api
+- local storage
+- Props
+- Responsive design
+
+### Requirements to run the project
+- Yarn need to be installed
+- Node need to be installed
+- Yarn install to install all dependencies 
+- Yarn dev
+
+## Sections - Screenshots
+<img src="https://github.com/Bikcodeh/budget-app/blob/main/public/screenshots/init.png?raw=true" width="800" />
+<img src="https://github.com/Bikcodeh/budget-app/blob/main/public/screenshots/with_data.png?raw=true" width="800" />
+<img src="https://github.com/Bikcodeh/budget-app/blob/main/public/screenshots/add.png?raw=true" width="800" />
+<img src="https://github.com/Bikcodeh/budget-app/blob/main/public/screenshots/edit.png?raw=true" width="800" />
