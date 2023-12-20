@@ -49,8 +49,6 @@ h2 {
 
 header {
   background-color: var(--azul);
-  min-height: 300px;
-  max-height: 440px;
   transition: max-height 0.25s ease-in;
 }
 

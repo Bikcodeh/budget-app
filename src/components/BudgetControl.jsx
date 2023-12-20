@@ -23,7 +23,7 @@ export const BudgetControl = () => {
 
   return (
     <div className="contenedor-presupuesto contenedor sombra dos-columnas">
-      <div>
+      <div style={{ alignSelf: 'center'}}>
         <CircularProgressbar
           value={percentajeSpent}
           text={`${percentajeSpent}% Spent`}
