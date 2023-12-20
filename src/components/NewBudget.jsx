@@ -1,11 +1,14 @@
 import { useContext, useState } from 'react'
 import { BudgetContext } from '../context/budgetContext'
 import { AlertMessage } from './AlertMessage';
+import { useBudgetContext } from '../hooks/useBudgetContext';
+import { BUDGET_ACTIONS } from '../context/budgetReducer';
 
 export const NewBudget = () => {
 
   const [message, setMessage] = useState('');
-  const {currentValue, updateValue, handleSession} = useContext(BudgetContext);
+  const {state, dispatch} = useBudgetContext();
+  const { currentValue } = state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +19,7 @@ export const NewBudget = () => {
       setMessage('')
       localStorage.setItem('hasData', 'true');
       localStorage.setItem('budgetMoney', currentValue);
-      handleSession(true);
+      dispatch({ type: BUDGET_ACTIONS.HANDLE_SESSION, payload: true});
     }
   }
 
@@ -30,7 +33,7 @@ export const NewBudget = () => {
                     type='text'
                     placeholder='Add your budget'
                     value={currentValue}
-                    onChange={e => updateValue(e.target.value)}
+                    onChange={e => dispatch({type: BUDGET_ACTIONS.UPDATE_VALUE, payload: e.target.value})}
                 />
             </div>
             <input type='submit' value='Add' />

@@ -1,12 +1,14 @@
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import { BudgetContext } from "../context/budgetContext";
 import { moneyFormatter } from "../helpers";
+import { useBudgetContext } from "../hooks/useBudgetContext";
+import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const BudgetControl = () => {
-  const { currentValue, expenses, resetApp } = useContext(BudgetContext);
+  const { state, dispatch } = useBudgetContext();
+  const { currentValue, expenses } = state;
   const totalSpent = useMemo(
     () =>
       expenses.reduce(
@@ -34,7 +36,7 @@ export const BudgetControl = () => {
         />
       </div>
       <div className="contenido-presupuesto">
-        <button className="reset-app" onClick={() => resetApp()}>
+        <button className="reset-app" onClick={() => dispatch({ type: BUDGET_ACTIONS.RESET})}>
           Restart budget
         </button>
         <p>

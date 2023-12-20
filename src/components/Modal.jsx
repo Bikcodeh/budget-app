@@ -2,20 +2,22 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useContext, useEffect, useMemo } from "react";
 import { BudgetContext } from "../context/budgetContext";
 import { generateUid } from "../helpers";
+import { useBudgetContext } from "../hooks/useBudgetContext";
+import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const Modal = ({ closeModal }) => {
-  const { addExpense, editExpense, currentActive, setExpenseActive } =
-    useContext(BudgetContext);
+  const { state, dispatch } = useBudgetContext();
+  const { currentActive } = state;
   const handleSubmit = ({ description, amount, category }) => {
     if (currentActive !== null) {
-      editExpense({ ...currentActive, description, amount, category})
+      dispatch({type: BUDGET_ACTIONS.EDIT_EXPENSE, payload: { ...currentActive, description, amount, category} })
     } else {
       const id = generateUid();
       const date = Date.now();
-      addExpense({ description, amount, category, id, date });
+      dispatch({type: BUDGET_ACTIONS.ADD_EXPENSE, payload: { description, amount, category, id, date } })
     }
     closeModal();
-    setExpenseActive(null);
+    dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: null})
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const Modal = ({ closeModal }) => {
           alt="Close Modal"
           onClick={() => {
             closeModal();
-            setExpenseActive(null);
+            dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: null})
           }}
         />
       </div>

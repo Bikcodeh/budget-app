@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
-import { BudgetContext } from "../context/budgetContext";
+import { useBudgetContext } from "../hooks/useBudgetContext";
+import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const Filters = () => {
 
-  const {filterExpenses, clearFiltered} = useContext(BudgetContext);
+  const {state, dispatch} = useBudgetContext();
 
   const handleFilter = (e) => {
     if (e.target.value == '') {
         clearFiltered()
+        dispatch({ type: BUDGET_ACTIONS.CLEAR_FILTERED})
     } else {
-        filterExpenses(e.target.value)
-        console.log("VAMOS");
-        console.log(e.target.value)
+        dispatch({ type: BUDGET_ACTIONS.FILTER_EXPENSES, payload: e.target.value})
     }
   }
   return (

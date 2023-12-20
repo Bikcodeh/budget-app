@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import { BudgetContext } from "../context/budgetContext";
 import { ExpenseItem } from "./ExpenseItem";
+import { useBudgetContext } from "../hooks/useBudgetContext";
+import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const ExpenseList = () => {
-  const { expenses, deleteExpense, setExpenseActive, filtered } =
-    useContext(BudgetContext);
-
-  const handleDeleteItem = (id) => {
-    deleteExpense(id);
-  };
+  const {state, dispatch } = useBudgetContext();
+  
+  const { expenses, filtered } = state;
 
   return (
     <div className="listado-gastos contenedor">
@@ -20,16 +17,16 @@ export const ExpenseList = () => {
             <ExpenseItem
               {...expense}
               key={expense.id}
-              onDelete={() => handleDeleteItem(expense.id)}
-              onClickItem={() => setExpenseActive(expense)}
+              onDelete={() => dispatch({ type: BUDGET_ACTIONS.DELETE_EXPENSE, payload: expense.id})}
+              onClickItem={() => dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: expense })}
             />
           ))
         : expenses.map((expense) => (
             <ExpenseItem
               {...expense}
               key={expense.id}
-              onDelete={() => handleDeleteItem(expense.id)}
-              onClickItem={() => setExpenseActive(expense)}
+              onDelete={() => dispatch({type: BUDGET_ACTIONS.DELETE_EXPENSE, payload: expense.id})}
+              onClickItem={() => dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: expense })}
             />
           ))}
     </div>

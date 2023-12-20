@@ -1,16 +1,18 @@
 import { Header } from "./components/Header";
-import { useContext, useEffect, useState } from "react";
-import { BudgetContext } from "./context/budgetContext";
+import { useEffect, useState } from "react";
 import { Modal } from "./components/Modal";
 import { ExpenseList } from "./components/ExpenseList";
 import { Filters } from "./components/Filters";
+import { useBudgetContext } from "./hooks/useBudgetContext";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
   const handleAddNewExpense = () => {
     setShowModal(true);
   };
-  const { currentValue, isLogged, currentActive } = useContext(BudgetContext);
+  const  { state, dispatch } = useBudgetContext();
+  const { currentValue, isLogged, currentActive } = state;
+  console.log(state);
   useEffect(() => {
     if (!!currentActive) {
       setShowModal(true);
@@ -23,8 +25,8 @@ function App() {
       {currentValue > 0 && isLogged && (
         <>
           <main>
-            <Filters />
-            <ExpenseList />
+           <Filters />
+           <ExpenseList />
           </main>
           <div className="nuevo-gasto">
             <img
