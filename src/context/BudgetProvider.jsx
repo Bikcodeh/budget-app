@@ -81,7 +81,13 @@ export const BudgetProvider = ({ children }) => {
     localStorage.removeItem('hasData')
     localStorage.removeItem('budgetMoney')
     localStorage.removeItem('expenses')
-    setBudgetState(initialState)
+    setBudgetState({
+      currentValue: 0,
+      isLogged: false,
+      expenses: [],
+      currentActive: null,
+      filtered: null
+    })
   }
   return (
     <BudgetContext.Provider

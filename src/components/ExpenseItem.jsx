@@ -7,10 +7,10 @@ import {
 } from "react-swipeable-list";
 import "react-swipeable-list/dist/styles.css";
 import { formatDate } from "../helpers";
-import FoodIcon from "/assets/icono_comida.svg";
-import HomeIcon from "/assets/icono_casa.svg";
-import HobbyIcon from "/assets/icono_ocio.svg";
-import SubscriptionIcon from "/assets/icono_suscripciones.svg";
+import FoodIcon from "/assets/icons/icono_comida.svg";
+import HomeIcon from "/assets/icons/icono_casa.svg";
+import HobbyIcon from "/assets/icons/icono_ocio.svg";
+import SubscriptionIcon from "/assets/icons/icono_suscripciones.svg";
 
 const categoryDictionary = {
   food: FoodIcon,
