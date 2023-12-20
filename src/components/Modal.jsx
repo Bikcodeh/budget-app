@@ -1,5 +1,4 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import CloseIcon from "/assets/icons/cerrar.svg";
 import { useContext, useEffect, useMemo } from "react";
 import { BudgetContext } from "../context/budgetContext";
 import { generateUid } from "../helpers";
@@ -36,7 +35,7 @@ export const Modal = ({ closeModal }) => {
     <div className="modal">
       <div className="cerrar-modal">
         <img
-          src={CloseIcon}
+          src={'assets/icons/cerrar.svg'}
           alt="Close Modal"
           onClick={() => {
             closeModal();

@@ -1,5 +1,4 @@
 import { Header } from "./components/Header";
-import IconNewExpense from "/assets/icons/nuevo-gasto.svg";
 import { useContext, useEffect, useState } from "react";
 import { BudgetContext } from "./context/budgetContext";
 import { Modal } from "./components/Modal";
@@ -29,7 +28,7 @@ function App() {
           </main>
           <div className="nuevo-gasto">
             <img
-              src={IconNewExpense}
+              src={'assets/icons/nuevo-gasto.svg'}
               alt="New Expense"
               onClick={handleAddNewExpense}
             />
