@@ -1,8 +1,6 @@
-import { useContext, useState } from 'react'
-import { BudgetContext } from '../context/budgetContext'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { AlertMessage } from './AlertMessage';
 import { useBudgetContext } from '../hooks/useBudgetContext';
-import { BUDGET_ACTIONS } from '../context/budgetReducer';
 
 export const NewBudget = () => {
 
@@ -10,7 +8,7 @@ export const NewBudget = () => {
   const {state, dispatch} = useBudgetContext();
   const { currentValue } = state;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!Number(currentValue) || currentValue < 0)  {
       setMessage('Value is invalid')
@@ -18,8 +16,8 @@ export const NewBudget = () => {
     } else {
       setMessage('')
       localStorage.setItem('hasData', 'true');
-      localStorage.setItem('budgetMoney', currentValue);
-      dispatch({ type: BUDGET_ACTIONS.HANDLE_SESSION, payload: true});
+      localStorage.setItem('budgetMoney', currentValue.toString());
+      dispatch({ type: 'handle_session', payload: true});
     }
   }
 
@@ -33,7 +31,7 @@ export const NewBudget = () => {
                     type='text'
                     placeholder='Add your budget'
                     value={currentValue}
-                    onChange={e => dispatch({type: BUDGET_ACTIONS.UPDATE_VALUE, payload: e.target.value})}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch({type: 'update_value', payload: Number(e.target.value)})}
                 />
             </div>
             <input type='submit' value='Add' />

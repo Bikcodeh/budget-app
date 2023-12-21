@@ -1,60 +1,51 @@
-export const BUDGET_ACTIONS = {
-    UPDATE_VALUE: 'update_value',
-    ADD_EXPENSE: 'add_expense',
-    DELETE_EXPENSE: 'delete_expense',
-    EDIT_EXPENSE: 'edit_expense',
-    SET_EXPENSE_ACTIVE: 'set_expense_active',
-    FILTER_EXPENSES: 'filter_expenses',
-    CLEAR_FILTERED: 'clear_filtered',
-    RESET: 'reset',
-    HANDLE_SESSION: 'handle_session'
-}
+import { BudgetAction } from './actions/index';
+import { BudgetState } from './BudgetContext';
 
-export const budgetReducer = (state, action) => {
+export const budgetReducer = (state: BudgetState, action: BudgetAction) => {
     switch (action.type) {
-        case BUDGET_ACTIONS.UPDATE_VALUE:
+        case 'update_value':
             return {
                 ...state,
                 currentValue: action.payload
             }
             break;
-        case BUDGET_ACTIONS.ADD_EXPENSE:
+        case 'add_expense':
             const newExpenses = [action.payload, ...state.expenses];
             localStorage.setItem('expenses', JSON.stringify(newExpenses));
             return { ...state, expenses: newExpenses };
             break;
-        case BUDGET_ACTIONS.DELETE_EXPENSE:
-            const expensesFiltered = state.expenses.filter((item) => item.id !== id)
+        case 'delete_expense':
+            const expensesFiltered = state.expenses.filter((item) => item.id !== action.payload.id)
             localStorage.setItem('expenses', JSON.stringify(expensesFiltered));
             return { ...state, expenses: expensesFiltered };
             break;
-        case BUDGET_ACTIONS.EDIT_EXPENSE:
+        case 'edit_expense':
             return {
                 ...state,
                 expenses: state.expenses.map((item) =>
-                    item.id === expense.id ? expense : item
+                    item.id === action.payload.id ? action.payload : item
                 )
             }
             break;
-        case BUDGET_ACTIONS.SET_EXPENSE_ACTIVE:
+        case 'set_expense_active':
             return {
                 ...state,
                 currentActive: action.payload
             }
             break;
-        case BUDGET_ACTIONS.FILTER_EXPENSES:
+        case 'filter_expenses':
             return {
                 ...state,
-                filtered: state.expenses.filter(item => item.category == category)
+                filtered: state.expenses.filter(item => item.category == action.payload)
             }
             break;
-        case BUDGET_ACTIONS.CLEAR_FILTERED:
+        case 'clear_filtered':
             return {
                 ...state,
                 filtered: null
             }
             break;
-        case BUDGET_ACTIONS.RESET:
+        case 'reset':
             localStorage.removeItem('hasData')
             localStorage.removeItem('budgetMoney')
             localStorage.removeItem('expenses')
@@ -66,7 +57,7 @@ export const budgetReducer = (state, action) => {
                 filtered: null
             }
             break;
-        case BUDGET_ACTIONS.HANDLE_SESSION:
+        case 'handle_session':
             return {
                 ...state,
                 isLogged: action.payload

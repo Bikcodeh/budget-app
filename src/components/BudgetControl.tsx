@@ -4,7 +4,6 @@ import "react-circular-progressbar/dist/styles.css";
 
 import { moneyFormatter } from "../helpers";
 import { useBudgetContext } from "../hooks/useBudgetContext";
-import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const BudgetControl = () => {
   const { state, dispatch } = useBudgetContext();
@@ -19,7 +18,7 @@ export const BudgetControl = () => {
   );
 
   const percentajeSpent = useMemo(
-    () => (((currentValue - (currentValue - totalSpent)) / currentValue) * 100).toFixed(2),
+    () => +(((currentValue - (currentValue - totalSpent)) / currentValue) * 100).toFixed(2),
     [expenses]
   );
 
@@ -36,20 +35,20 @@ export const BudgetControl = () => {
         />
       </div>
       <div className="contenido-presupuesto">
-        <button className="reset-app" onClick={() => dispatch({ type: BUDGET_ACTIONS.RESET})}>
+        <button className="reset-app" onClick={() => dispatch({ type: 'reset' })}>
           Restart budget
         </button>
         <p>
           <span>Budget: </span>
-          {moneyFormatter(currentValue)}
+          {moneyFormatter(currentValue.toString())}
         </p>
         <p className={currentValue - totalSpent < 0 ? `error` : ""}>
           <span>Available: </span>
-          {moneyFormatter(currentValue - totalSpent)}
+          {moneyFormatter((currentValue - totalSpent).toString())}
         </p>
         <p>
           <span>Spent: </span>
-          {moneyFormatter(totalSpent)}
+          {moneyFormatter(totalSpent.toString())}
         </p>
       </div>
     </div>

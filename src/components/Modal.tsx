@@ -1,23 +1,43 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useContext, useEffect, useMemo } from "react";
-import { BudgetContext } from "../context/budgetContext";
 import { generateUid } from "../helpers";
 import { useBudgetContext } from "../hooks/useBudgetContext";
-import { BUDGET_ACTIONS } from "../context/budgetReducer";
+import { Expense } from "../interfaces";
 
-export const Modal = ({ closeModal }) => {
+interface Props {
+  closeModal: () => void;
+}
+
+interface HandleSubmitProps {
+  description: string;
+  amount: number;
+  category: string;
+}
+
+interface FormDataErrors {
+  amount?: string;
+  description?: string;
+  category?: string;
+}
+
+export const Modal = ({ closeModal }: Props) => {
+
   const { state, dispatch } = useBudgetContext();
+
   const { currentActive } = state;
-  const handleSubmit = ({ description, amount, category }) => {
+
+  const handleSubmit = ({ description, amount, category }: HandleSubmitProps) => {
     if (currentActive !== null) {
-      dispatch({type: BUDGET_ACTIONS.EDIT_EXPENSE, payload: { ...currentActive, description, amount, category} })
+      dispatch({ type: 'edit_expense', payload: { ...currentActive, description, amount, category } })
     } else {
       const id = generateUid();
       const date = Date.now();
-      dispatch({type: BUDGET_ACTIONS.ADD_EXPENSE, payload: { description, amount, category, id, date } })
+      const newExpense: Expense = { description, amount, category, id, date }
+    
+      dispatch({ type: 'add_expense', payload: newExpense })
     }
     closeModal();
-    dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: null})
+    dispatch({ type: 'set_expense_active', payload: null })
   };
 
   useEffect(() => {
@@ -27,7 +47,7 @@ export const Modal = ({ closeModal }) => {
     };
   }, []);
 
-  const initialFormData = useMemo(() => ({
+  const initialFormData: HandleSubmitProps = useMemo(() => ({
     description: currentActive?.description ?? '',
     amount: currentActive?.amount ?? 0,
     category: currentActive?.category ?? ''
@@ -41,7 +61,7 @@ export const Modal = ({ closeModal }) => {
           alt="Close Modal"
           onClick={() => {
             closeModal();
-            dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: null})
+            dispatch({ type: 'set_expense_active', payload: null })
           }}
         />
       </div>
@@ -52,10 +72,10 @@ export const Modal = ({ closeModal }) => {
         }}
       >
         <Formik
-          initialValues={{ ...initialFormData }}
+          initialValues={initialFormData}
           validate={(values) => {
-            const errors = {};
-            if (values.amount < 0 || !Number(values.amount)) {
+            const errors: FormDataErrors = { };
+            if (Number(values.amount) < 0 || !Number(values.amount)) {
               errors.amount = "Invalid amount";
             }
             if (values.description == "") {
@@ -73,7 +93,7 @@ export const Modal = ({ closeModal }) => {
         >
           {({ isSubmitting }) => (
             <Form className="formulario animate__animated animate__fadeIn animate__fast">
-              <legend>{ currentActive ? 'Edit' : 'New'} Expense</legend>
+              <legend>{currentActive ? 'Edit' : 'New'} Expense</legend>
               <div className="campo">
                 <label htmlFor="description">Description</label>
                 <Field
@@ -118,7 +138,7 @@ export const Modal = ({ closeModal }) => {
               </div>
               <input
                 type="submit"
-                value={ currentActive ? 'Edit expense' : 'Add Expense'}
+                value={currentActive ? 'Edit expense' : 'Add Expense'}
                 disabled={isSubmitting}
               />
             </Form>

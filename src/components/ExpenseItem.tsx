@@ -7,16 +7,31 @@ import {
 } from "react-swipeable-list";
 import "react-swipeable-list/dist/styles.css";
 import { formatDate } from "../helpers";
+import { Expense } from "../interfaces";
 
-const categoryDictionary = {
+interface Props {
+  expense: Expense;
+  onDelete: () => void;
+  onClickItem: () => void;
+}
+
+interface DictionaryCategoryIcons {
+  food: string;
+  movies: string;
+  home: string;
+  hobby: string;
+  [key: string]: string;
+}
+
+const categoryDictionary: DictionaryCategoryIcons = {
   food: 'assets/icons/icono_comida.svg',
   movies: 'assets/icons/icono_suscripciones.svg',
   home: 'assets/icons/icono_casa.svg',
   hobby: 'assets/icons/icono_ocio.svg',
 };
 
-export const ExpenseItem = (props) => {
-  const { date, amount, description, category, onDelete, onClickItem } = props;
+export const ExpenseItem = ({ expense, onDelete, onClickItem }: Props) => {
+  const { date, amount, description, category } = expense;
 
   const leadingActions = () => (
     <LeadingActions>

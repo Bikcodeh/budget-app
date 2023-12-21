@@ -1,6 +1,5 @@
 import { ExpenseItem } from "./ExpenseItem";
 import { useBudgetContext } from "../hooks/useBudgetContext";
-import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const ExpenseList = () => {
   const {state, dispatch } = useBudgetContext();
@@ -15,18 +14,18 @@ export const ExpenseList = () => {
       {filtered
         ? filtered.map((expense) => (
             <ExpenseItem
-              {...expense}
+              expense={expense}
               key={expense.id}
-              onDelete={() => dispatch({ type: BUDGET_ACTIONS.DELETE_EXPENSE, payload: expense.id})}
-              onClickItem={() => dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: expense })}
+              onDelete={() => dispatch({ type: 'delete_expense', payload: { id: expense.id}})}
+              onClickItem={() => dispatch({ type: 'set_expense_active', payload: expense })}
             />
           ))
         : expenses.map((expense) => (
             <ExpenseItem
-              {...expense}
+              expense={expense}
               key={expense.id}
-              onDelete={() => dispatch({type: BUDGET_ACTIONS.DELETE_EXPENSE, payload: expense.id})}
-              onClickItem={() => dispatch({ type: BUDGET_ACTIONS.SET_EXPENSE_ACTIVE, payload: expense })}
+              onDelete={() => dispatch({type: 'delete_expense', payload: { id: expense.id}})}
+              onClickItem={() => dispatch({ type: 'set_expense_active', payload: expense })}
             />
           ))}
     </div>

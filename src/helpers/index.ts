@@ -1,4 +1,4 @@
-export const moneyFormatter = (amount) => {
+export const moneyFormatter = (amount: string): string => {
     return Number(amount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
@@ -8,7 +8,7 @@ export const generateUid = () => {
     return random + date;
 }
 
-export const formatDate = date => {
+export const formatDate = (date: number): string => {
     const newDate = new Date(date);
     return newDate.toLocaleDateString('en-US', {
         year:   'numeric',

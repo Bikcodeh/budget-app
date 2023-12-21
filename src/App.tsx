@@ -12,7 +12,7 @@ function App() {
   };
   const  { state, dispatch } = useBudgetContext();
   const { currentValue, isLogged, currentActive } = state;
-  console.log(state);
+
   useEffect(() => {
     if (!!currentActive) {
       setShowModal(true);

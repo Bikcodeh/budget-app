@@ -1,16 +1,15 @@
+import { ChangeEvent } from "react";
 import { useBudgetContext } from "../hooks/useBudgetContext";
-import { BUDGET_ACTIONS } from "../context/budgetReducer";
 
 export const Filters = () => {
 
   const {state, dispatch} = useBudgetContext();
 
-  const handleFilter = (e) => {
+  const handleFilter = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value == '') {
-        clearFiltered()
-        dispatch({ type: BUDGET_ACTIONS.CLEAR_FILTERED})
+        dispatch({ type: 'clear_filtered'})
     } else {
-        dispatch({ type: BUDGET_ACTIONS.FILTER_EXPENSES, payload: e.target.value})
+        dispatch({ type: 'filter_expenses', payload: e.target.value})
     }
   }
   return (
